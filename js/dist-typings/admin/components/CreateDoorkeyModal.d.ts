@@ -1,0 +1,50 @@
+import { IFormModalAttrs } from 'flarum/common/components/FormModal';
+import FormModal from 'flarum/common/components/FormModal';
+import ItemList from 'flarum/common/utils/ItemList';
+import Stream from 'flarum/common/utils/Stream';
+import type Mithril from 'mithril';
+export interface ICreateDoorkeyModalAttrs extends IFormModalAttrs {
+    key?: string;
+    groupId?: string;
+    maxUses?: number;
+    activates?: boolean;
+    /**
+     * Called after a doorkey is successfully created, so the opener (e.g. the
+     * list page) can refresh its data. Fires on every create, including when
+     * "create another" keeps the modal open.
+     */
+    oncreated?: () => void;
+}
+export type SignupBody = {
+    key: string;
+    groupId: string;
+    maxUses: number;
+    activates: boolean;
+};
+export default class CreateDoorkeyModal<CustomAttrs extends ICreateDoorkeyModalAttrs = ICreateDoorkeyModalAttrs> extends FormModal<CustomAttrs> {
+    key: Stream<string>;
+    groupId: Stream<number>;
+    maxUses: Stream<number>;
+    activates: Stream<boolean>;
+    /**
+     * Keeps the modal open after the doorkey is created to facilitate creating
+     * multiple doorkeys at once.
+     */
+    bulkAdd: Stream<boolean>;
+    oninit(vnode: Mithril.Vnode<CustomAttrs, this>): void;
+    className(): string;
+    title(): string | any[];
+    content(): JSX.Element;
+    fields(): ItemList<Mithril.Children>;
+    onready(): void;
+    onsubmit(e?: SubmitEvent | null): void;
+    getGroupsForInput(): {
+        [key: string]: string;
+    };
+    generateRandomKey(): string;
+    /**
+     * Get the data that should be submitted in the sign-up request.
+     */
+    submitData(): SignupBody;
+    resetData(): void;
+}
