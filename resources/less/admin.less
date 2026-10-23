@@ -1,0 +1,232 @@
+.fof-doorman-Page .ExtensionPage-header {
+  margin-bottom: 16px;
+}
+
+.DoorkeyListPage {
+  // Pad bottom of page to make nav area look less squashed
+  padding-bottom: 24px;
+
+  &-section {
+    & + & {
+      margin-top: 28px;
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--control-bg);
+    }
+
+    &-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    &-titleGroup {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-body {
+      // Separate the save button from the setting/help text above it.
+      .Form-controls {
+        margin-top: 20px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-toolbar {
+    margin-bottom: 14px;
+
+    .Search-input input {
+      max-width: 320px;
+    }
+  }
+
+  &-totalDoorkeys {
+    margin: 0;
+    color: var(--muted-color);
+    font-size: 13px;
+  }
+
+  &-grid {
+    width: 100%;
+    position: relative;
+    border-radius: var(--border-radius);
+
+    // Use CSS custom properties to define the number of columns in the grid
+    grid-template-columns: repeat(var(--columns), max-content);
+
+    // Ensure mobile scrollbar isn't on top of content
+    padding-bottom: 4px;
+
+    // Table refreshing overlay
+    &--loadingPage {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(128, 128, 128, 0.2);
+      }
+
+      .LoadingIndicator-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    &--loaded,
+    &--loadingPage {
+      display: grid;
+      overflow-x: auto;
+      overflow: visible;
+    }
+
+    &-header {
+      font-weight: bold;
+      border-bottom: 1px solid var(--muted-more-color);
+      padding: 8px 16px;
+      background: var(--control-bg);
+    }
+
+    &-rowItem {
+      padding: 4px 16px;
+      display: flex;
+      align-items: center;
+
+      &--shaded {
+        background: var(--body-bg-shaded);
+
+        [data-theme^=dark] & {
+          background: var(--body-bg-light);
+        }
+      }
+
+      &[data-column-name="manage"] {
+        display: flex;
+        gap: 5px;
+      }
+    }
+  }
+
+  &-gridPagination {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  &-pageNumber {
+    text-align: center;
+  }
+
+  &-pageNumberInput {
+    display: inline-block;
+    margin: 0 8px;
+    width: auto;
+    max-width: 80px;
+  }
+}
+
+.Doorkey-allowPublic {
+  // Keep the toggle's own group margin so the help text has breathing room
+  // before the save button below it.
+  > .Form-group:first-child {
+    margin-bottom: 0;
+  }
+}
+
+.Doorkey-container {
+  .Doorkey-badge {
+    background-color: #d83e3e;
+  }
+
+  .Table {
+    background: transparent;
+    margin: 20px 0;
+
+    th,
+    td {
+      padding: 5px 15px;
+      text-align: left;
+
+      &:first-of-type {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .Checkbox--switch {
+    padding-left: var(--left-pad);
+    margin: 0;
+  }
+}
+
+.InviteCodeModal {
+  .Modal-body {
+    padding-top: 5px;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .emailListItem {
+    list-style: none;
+    background: var(--muted-color);
+    border-radius: var(--border-radius);
+
+    margin-bottom: 10px;
+
+    p {
+      display: inline-block;
+      color: var(--body-bg);
+      margin: 4px 0 5px 50px;
+    }
+
+    button {
+      background: none;
+      height: 10px !important;
+      width: 10px;
+      line-height: 10px;
+      float: right;
+      margin: 5px 10px;
+      padding: 10px !important;
+
+      i {
+        bottom: 8px;
+        position: relative;
+        right: 3px;
+        color: var(--body-bg);
+      }
+    }
+  }
+}
